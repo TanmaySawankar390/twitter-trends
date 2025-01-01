@@ -1,4 +1,4 @@
-# Twitter-trends STIR. Assignment [Youtube Video](https://youtu.be/C-5gH3p2FnM)
+# Twitter-trends STIR. Assignment
 
 [Youtube Video](https://youtu.be/C-5gH3p2FnM)
 
