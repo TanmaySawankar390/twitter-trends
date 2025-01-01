@@ -1,4 +1,4 @@
-# Twitter-trends STIR. Assignment
+# Twitter-trends STIR. Assignment [Live Link](https://youtu.be/C-5gH3p2FnM)
 
 The Twitter Trending Scraper is an automated tool designed to log into Twitter, navigate to the trending section, and scrape the top trending topics. Using Selenium WebDriver for browser automation and Axios for API requests, it collects real-time IP information via a proxy and securely stores the scraped trends in a MongoDB database. Built with Node.js, the project emphasizes security by using environment variables for sensitive data. This tool is ideal for analyzing social media trends, supporting research, or tracking popular hashtags for marketing purposes.
 
