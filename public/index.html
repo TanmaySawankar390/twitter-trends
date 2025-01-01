@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Twitter Trending Topics</title>
+  <style>
+    :root {
+      --primary-color: #1DA1F2;
+      --secondary-color: #14171A;
+      --background-color: #F5F8FA;
+      --card-background: #FFFFFF;
+      --text-primary: #14171A;
+      --text-secondary: #657786;
+      --hover-color: #1991DA;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background-color);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--text-primary);
+    }
+
+    .container {
+      background-color: var(--card-background);
+      padding: 1.5rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 600px;
+      margin: 1rem;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      color: var(--secondary-color);
+      margin: 0 0 1rem 0;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    button {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-weight: 600;
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto 1rem auto;
+    }
+
+    button:hover {
+      background-color: var(--hover-color);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(29, 161, 242, 0.2);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    #results {
+      overflow-y: auto;
+      flex-grow: 1;
+      padding-right: 0.5rem;
+    }
+
+    #results::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    #results::-webkit-scrollbar-track {
+      background: var(--background-color);
+      border-radius: 3px;
+    }
+
+    #results::-webkit-scrollbar-thumb {
+      background: var(--text-secondary);
+      border-radius: 3px;
+    }
+
+    #results p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin: 0.75rem 0;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+
+    ul li {
+      background-color: var(--background-color);
+      margin: 0.5rem 0;
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    ul li:hover {
+      transform: translateX(4px);
+      background-color: rgba(29, 161, 242, 0.1);
+    }
+
+    pre {
+      background-color: var(--background-color);
+      padding: 0.75rem;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      overflow-x: auto;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      margin-top: 1rem;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 1rem;
+        margin: 0.5rem;
+        max-height: 85vh;
+      }
+
+      h1 {
+        font-size: 1.25rem;
+      }
+
+      button {
+        padding: 0.625rem 1.25rem;
+      }
+
+      ul li {
+        padding: 0.625rem 0.875rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Twitter Trending Topics</h1>
+    <button id="run-script">Get Trending Topics</button>
+    <div id="results"></div>
+  </div>
+
+  <script>
+    document.getElementById('run-script').onclick = async () => {
+      const response = await fetch('/run-script');
+      const result = await response.json();
+
+      const div = document.getElementById('results');
+      div.innerHTML = `
+        <p>These are the most happening topics as of ${result.dateTime}:</p>
+        <ul>
+          <li>${result.trends[0]}</li>
+          <li>${result.trends[1]}</li>
+          <li>${result.trends[2]}</li>
+          <li>${result.trends[3]}</li>
+          <li>${result.trends[4]}</li>
+        </ul>
+        <p>The IP address used for this query was ${result.ipAddress}</p>
+        <pre>${JSON.stringify(result, null, 2)}</pre>
+      `;
+    };
+  </script>
+</body>
+</html>
